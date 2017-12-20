@@ -1,12 +1,13 @@
 var platform;
 var ball;
-const CANVAS_WIDTH = 800;
+const CANVAS_WIDTH = 350;
 const CANVAS_HEIGTH = 600;
-const PLATFORM_SPEED = 7;
+const PLATFORM_SPEED = 3;
+const BALL_SPEED = 3;
 const BACKGROUND_COLOR = 0;
-const BLOCKS_WIDTH = CANVAS_WIDTH/10;
+const NUM_BLOCKS = 10;
+const BLOCKS_WIDTH = CANVAS_WIDTH/NUM_BLOCKS;
 const BLOCKS_HEIGHT = 20;
-const NUM_BLOCKS = CANVAS_WIDTH/BLOCKS_WIDTH * 6;
 
 var blocksCoordinates = [];
 
@@ -34,7 +35,6 @@ function drawBlocks(){
 	}
 }
 
-
 function setup() {
 	createCanvas(CANVAS_WIDTH, CANVAS_HEIGTH);
 	background(BACKGROUND_COLOR);
@@ -44,31 +44,14 @@ function setup() {
 }
 
 function draw() {
-	//background(51);
+
 	platform.update();
 	platform.show();
+
 	ball.update(platform.x, platform.y);
 	ball.show();
-}
 
-function keyReleased() {
-	platform.direction(0, 0);
-}
-
-function keyPressed() {
-	if(keyCode == UP_ARROW) {
-		platform.direction(0, -PLATFORM_SPEED);
-	}
-	else if(keyCode == DOWN_ARROW){
-		platform.direction(0, PLATFORM_SPEED);
-	}
-	else if(keyCode == RIGHT_ARROW){
-		platform.direction(PLATFORM_SPEED, 0);
-	}
-	else if(keyCode == LEFT_ARROW){
-		platform.direction(-PLATFORM_SPEED, 0);
-	}
-	else{
-		platform.direction(0, 0);
+	if(!blocksCoordinates.length){
+		setup();
 	}
 }
